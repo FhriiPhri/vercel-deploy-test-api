@@ -1,5 +1,20 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| Set Storage Path for Vercel
+|--------------------------------------------------------------------------
+*/
+if (isset($_SERVER['VERCEL_URL'])) {
+    $storagePath = '/tmp/storage';
+    if (!is_dir($storagePath)) {
+        mkdir($storagePath . '/framework/views', 0755, true);
+        mkdir($storagePath . '/framework/cache', 0755, true);
+        mkdir($storagePath . '/framework/sessions', 0755, true);
+    }
+    $app->useStoragePath($storagePath);
+}
+
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
